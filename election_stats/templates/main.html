@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wahlergebnisse</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <h3>Bundesländer</h3>
+        <ul>
+            {% for state in states %}
+            <li>{{state.name}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
