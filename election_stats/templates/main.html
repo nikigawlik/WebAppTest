@@ -5,13 +5,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wahlergebnisse</title>
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="static/main.js"></script>
     </head>
     <body>
-        <h3>Bundesländer</h3>
-        <ul>
-            {% for state in states %}
-            <li>{{state.name}}</li>
-            {% endfor %}
-        </ul>
+        <div id="app">
+            ${ message }
+            <div id="stateSection">
+                <h3>Bundesländer</h3>
+                <ul v-if="states.length > 0">
+                    <li v-for="state in states">
+                        <a href="#" v-on:click.prevent="getDistricts(state.id)">${ state.name }</a>
+                    </li>
+                </ul>
+            </div>
+            <div v-if="districts.length > 0" id="districtSection">
+                <h3>Wahlkreise</h3>
+                <ul>
+                    <li v-for="district in districts">
+                        ${district.name}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </body>
 </html>
