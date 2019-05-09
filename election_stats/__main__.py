@@ -4,6 +4,7 @@ from flask import g
 import os
 from election_stats.model import Region, RegionType, Party, Result, get_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import or_, desc
 
 app = Flask(__name__, static_url_path = '/static')
 
@@ -45,9 +46,11 @@ def get_subregions(region_id):
 @app.route('/regions/<region_id>/results', methods=['GET'])
 def get_results(region_id):
     session = Session()
-    region = session.query(Region).filter_by(id = region_id).one()
+    results = session.query(Result)\
+        .filter_by(region_id = region_id)\
+        .filter(or_(Result.erststimmen > 0, Result.zweitstimmen > 0))\
+        .order_by(desc(Result.zweitstimmen))
     session.commit()
-    results = region.results
     return jsonify([r.to_dict() for r in results])
 
 @app.route('/parties/', methods=['GET'])

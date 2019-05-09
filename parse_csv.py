@@ -56,8 +56,8 @@ with open(filename, newline='\n', encoding='utf-8') as csvfile:
             result = Result(
                 party_id = int((i - startColumn)/4),
                 region_id = region.id,
-                erststimmen = int(row[i]) if row[i] else row[i],
-                zweitstimmen = int(row[i+2]) if row[i+2] else row[i+2],
+                erststimmen = int(row[i]) if row[i] else 0,
+                zweitstimmen = int(row[i+2]) if row[i+2] else 0,
             )
             results.append(result)
             # print(result)

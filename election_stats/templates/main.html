@@ -10,7 +10,6 @@
     </head>
     <body>
         <div id="app">
-            ${ message }
             <div id="stateSection">
                 <h3>Bundesländer</h3>
                 <ul v-if="states.length > 0">
@@ -23,9 +22,22 @@
                 <h3>Wahlkreise</h3>
                 <ul>
                     <li v-for="district in districts">
-                        ${district.name}
+                        <a href="#" v-on:click.prevent="getResults(district.id)">${ district.name }</a>
                     </li>
                 </ul>
+            </div>
+            <div v-if="results.length > 0" id="resultsSection">
+                <h3>Ergebniss</h3>
+                <table>
+                    <tr>
+                        <th>Partei</th><th>Erststimmen</th><th>Zweitstimmen</th>
+                    </tr>
+                    <tr v-for="result in results">
+                        <td>${ result.partyName }</td>
+                        <td>${ result.erststimmenRelative | toPercentage }</td>
+                        <td>${ result.zweitstimmenRelative | toPercentage }</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </body>
