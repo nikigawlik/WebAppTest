@@ -30,7 +30,7 @@ with open(filename, newline='\n', encoding='utf-8') as csvfile:
             id = int((i - startColumn)/4),
         )
         parties.append(party)
-        # print(party)
+        print(party)
 
     # read data rows
     for row in reader:
@@ -41,21 +41,21 @@ with open(filename, newline='\n', encoding='utf-8') as csvfile:
         region = Region(
             id = int(row[0]) + 1000 if not (row[2] and int(row[2]) != 99) else int(row[0]),
             name = row[1],
-            parentRegion = int(row[2]) + 1000 if row[2] else row[2],
+            parent_region_id = int(row[2]) + 1000 if row[2] else row[2],
             eligibleVoters = int(row[3]),
             voters = int(row[7]),
             regionType = RegionType.country if int(row[0]) == 99 else (RegionType.state if int(row[2]) == 99 else RegionType.district)
         )
         regions.append(region)
-        print(region)
+        # print(region)
 
         for i in range(startColumn, len(partyRow), 4):
             if not partyRow[i]:
                 continue
             
             result = Result(
-                party = int((i - startColumn)/4),
-                region = region.id,
+                party_id = int((i - startColumn)/4),
+                region_id = region.id,
                 erststimmen = int(row[i]) if row[i] else row[i],
                 zweitstimmen = int(row[i+2]) if row[i+2] else row[i+2],
             )
