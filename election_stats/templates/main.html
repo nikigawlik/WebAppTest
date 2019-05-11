@@ -4,41 +4,69 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wahlergebnisse</title>
+        <link rel="stylesheet" href="../static/styles/app.css">
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="static/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     </head>
     <body>
         <div id="app">
-            <div id="stateSection">
-                <h3>Bundesländer</h3>
-                <ul v-if="states.length > 0">
-                    <li v-for="state in states">
-                        <a href="#" v-on:click.prevent="getDistricts(state.id)">${ state.name }</a>
-                    </li>
-                </ul>
+            <div class="header">
+                <h1>Wahlergebnisse 2017</h1>
             </div>
-            <div v-if="districts.length > 0" id="districtSection">
-                <h3>Wahlkreise</h3>
-                <ul>
-                    <li v-for="district in districts">
-                        <a href="#" v-on:click.prevent="getResults(district.id)">${ district.name }</a>
-                    </li>
-                </ul>
-            </div>
-            <div v-if="results.length > 0" id="resultsSection">
-                <h3>Ergebniss</h3>
-                <table>
-                    <tr>
-                        <th>Partei</th><th>Erststimmen</th><th>Zweitstimmen</th>
-                    </tr>
-                    <tr v-for="result in results">
-                        <td>${ result.partyName }</td>
-                        <td>${ result.erststimmenRelative | toPercentage }</td>
-                        <td>${ result.zweitstimmenRelative | toPercentage }</td>
-                    </tr>
-                </table>
+            <div>
+                <div id="stateSection">
+                    <h2>Bundesländer</h2>
+                    &#x1F50E; <input type="text" id="search-input-state" onkeyup="search('stateSection', 'search-input-state')" placeholder="Bundesland filter" title="Bundesland filter">
+                    <ul v-if="states.length > 0">
+                        <li v-for="state in states">
+                            <a href="#" v-on:click.prevent="getDistricts(state.id)">${ state.name }</a>
+                        </li>
+                    </ul>
+                </div>
+                <div v-if="districts.length > 0" id="districtSection">
+                    <h2>Wahlkreise</h2>
+                    &#x1F50E; <input type="text" id="search-input-district" onkeyup="search('districtSection', 'search-input-district')" placeholder="Wahlkreis filter" title="Wahlkreis filter">
+                    <ul>
+                        <li v-for="district in districts">
+                            <a href="#" v-on:click.prevent="getResults(district.id)">${ district.name }</a>
+                        </li>
+                    </ul>
+                </div>
+                <div v-if="results.length > 0" id="resultsSection">
+                    <h3>Ergebnisse </h3>
+                    <table>
+                        <tr>
+                            <th>Partei</th><th>Erststimmen</th><th>Zweitstimmen</th>
+                        </tr>
+                        <tr v-for="result in results">
+                            <td>${ result.partyName }</td>
+                            <td>${ result.erststimmenRelative | toPercentage }</td>
+                            <td>${ result.zweitstimmenRelative | toPercentage }</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
+
+        <div class="pie-chart">
+            <div>
+                <label>Erststimmen</label>
+                <canvas class="chart chart-pie" id="pie1">
+                </canvas>
+            </div>
+            <div>
+                <label>Zweitstimmen</label>
+                <canvas class="chart chart-pie" id="pie2">
+                </canvas>
+            </div>
+            </div>
+        <div class="bar-chart">
+            <label>Erst- und Zweitstimmen</label>
+            <canvas id="bar" class="chart chart-bar">
+            </canvas>
+        </div>
     </body>
+    <script src="static/charts.js"></script>
 </html>
