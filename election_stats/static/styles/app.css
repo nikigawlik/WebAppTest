@@ -40,7 +40,8 @@
   }
   .pie-chart, .bar-chart {
     padding-top: 0;
-    float: right;
+    width: 45%;
+    /* display: none; */
   }
   .chart-pie {
     margin-bottom: 15px;
