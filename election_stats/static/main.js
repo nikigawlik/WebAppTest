@@ -1,4 +1,5 @@
 "use strict";
+
 window.onload = function() {
     var app = new Vue({
         delimiters:['${', '}'],
@@ -73,4 +74,19 @@ window.onload = function() {
     });
 
     window.myapp = app; // for debug 
+    
+}
+
+function search(value, id) {
+    var searchBar = document.getElementById(id).value.toUpperCase();
+    var listitems = document.getElementById(value).getElementsByTagName("li");
+    for (var i in listitems) {
+        if(!isNaN(i)){
+            var link = listitems[i].getElementsByTagName("a")[0];
+            var query = link.textContent || link.innerText;
+            if (query.toUpperCase().indexOf(searchBar) > -1) {
+                listitems[i].style.display = "";
+            } else listitems[i].style.display = "none";
+        }
+    }
 }
