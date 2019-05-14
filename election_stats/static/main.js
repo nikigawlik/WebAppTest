@@ -59,7 +59,7 @@ window.onload = function() {
             
                     // The data for our dataset
                     data: {
-                        labels: ['SDP Erststimme','SDP Zweitstimme', 'LINKE Erststimme','LINKE Zweitstimme', 'CDU Erststimme', 'CDU Zweitstimme', 'Grüne Erststimme', 'Grüne Zweitstimme', 'AfD Erststimme', 'AfD Zweitstimme', 'FDP Erststimme', 'FDP Zweitstimme', 'Andere Zweitstimme', 'Andere Zweitstimme'],
+                        labels: ['SDP Erststimme','SDP Zweitstimme', 'LINKE Erststimme','LINKE Zweitstimme', 'CDU/CSU Erststimme', 'CDU/CSU Zweitstimme', 'Grüne Erststimme', 'Grüne Zweitstimme', 'AfD Erststimme', 'AfD Zweitstimme', 'FDP Erststimme', 'FDP Zweitstimme', 'Andere Zweitstimme', 'Andere Zweitstimme'],
                         datasets: [{
                             label: 'Erst- und Zweitstimmenverteilung',
                             backgroundColor:['red','red','purple','purple','black','black','green','green', 'blue', 'blue','yellow','yellow','grey','grey'],
@@ -80,7 +80,7 @@ window.onload = function() {
             
                     // The data for our dataset
                     data: {
-                        labels: ['SDP', 'LINKE', 'CDU', 'Grüne', 'AfD', 'FDP', 'Andere'],
+                        labels: ['SDP', 'LINKE', 'CDU/CSU', 'Grüne', 'AfD', 'FDP', 'Andere'],
                         datasets: [{
                             label: 'Erststimmenverteilung',
                             backgroundColor:['red','purple','black','green', 'blue','yellow','grey'],
@@ -101,7 +101,7 @@ window.onload = function() {
             
                     // The data for our dataset
                     data: {
-                        labels: ['SDP', 'LINKE', 'CDU', 'Grüne', 'AfD', 'FDP', 'Andere'],
+                        labels: ['SDP', 'LINKE', 'CDU/CSU', 'Grüne', 'AfD', 'FDP', 'Andere'],
                         datasets: [{
                             label: 'Zweitstimmenverteilung',
                             backgroundColor:['red','purple','black','green', 'blue','yellow','grey'],
@@ -135,7 +135,7 @@ window.onload = function() {
                             chart1.data.datasets[0].data[2] = r.erststimmen;
                             chart1.data.datasets[0].data[3] = r.zweitstimmen;
                         }
-                        if (r.party_id == 0){
+                        if (r.party_id == 0 || r.party_id == 4){
                             chart2.data.datasets[0].data[2] = r.erststimmen;
                             chart3.data.datasets[0].data[2] = r.zweitstimmen;
                             chart1.data.datasets[0].data[4] = r.erststimmen;
@@ -159,7 +159,7 @@ window.onload = function() {
                             chart1.data.datasets[0].data[10] = r.erststimmen;
                             chart1.data.datasets[0].data[11] = r.zweitstimmen;
                         }
-                        if (r.party_id >= 7 || r.party_id == 4) {
+                        if (r.party_id >= 7) {
                             chart2.data.datasets[0].data[6] = (chart2.data.datasets[0].data[6] || 0) + Number(r.erststimmen);
                             chart3.data.datasets[0].data[6] = (chart3.data.datasets[0].data[6] || 0) + Number(r.zweitstimmen);
                             chart1.data.datasets[0].data[12] = (chart1.data.datasets[0].data[12] || 0) + Number(r.erststimmen);
