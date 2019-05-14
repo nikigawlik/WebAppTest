@@ -32,16 +32,16 @@
     padding: 25px;
   }
 
-  .chartsection, .pie-chart, .bar-chart {
+  #pie-chart, #bar-chart {
     width: 50%;
     float: left;
     height: auto;
     padding: 25px;
   }
-  .pie-chart, .bar-chart {
+  #pie-chart, #bar-chart {
     padding-top: 0;
     width: 45%;
-    /* display: none; */
+    display: none; 
   }
   .chart-pie {
     margin-bottom: 15px;
